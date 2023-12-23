@@ -49,3 +49,7 @@ end
 gem 'dotenv-rails'
 gem 'devise'
 gem 'devise-jwt'
+gem 'jsonapi-serializer'
+gem 'faker'
+gem 'activemodel-serializers-xml'
+gem 'active_model_serializers'

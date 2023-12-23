@@ -21,6 +21,7 @@ Generated a `User` model using Devise for authentication:
 rails generate devise:install
 rails generate devise User
 rails db:migrate
+rails db:seed
 ```
 
 ### Controller Setup
@@ -46,6 +47,31 @@ end
 ### Authentication
 
 Integrated Devise and Devise-JWT for token-based authentication in the `User` model and set up authentication in the `Api::EventsController`.
+
+### Authentication
+#### Sign-in
+- **Endpoint**: `POST /login`
+  - Creates a new session for the user.
+
+#### Sign-out
+- **Endpoint**: `DELETE /logout`
+  - Destroys the current session, signing the user out.
+
+### User Registration
+#### New User Registration
+- **Endpoint**: `GET /signup/sign_up`
+  - Renders the page for new user registration.
+- **Endpoint**: `GET /signup/edit`
+  - Renders the page for editing user registration.
+- **Endpoint**: `POST /signup`
+  - Creates a new user registration.
+- **Endpoint**: `PATCH /signup`
+  - Updates the user's registration.
+- **Endpoint**: `DELETE /signup`
+  - Deletes the user's registration.
+- **Endpoint**: `GET /signup/cancel`
+  - Cancels the user's registration.
+
 
 ### API Documentation
 

@@ -7,5 +7,6 @@ class User < ApplicationRecord
          :jwt_authenticatable, jwt_revocation_strategy: self
   def jwt_payload
     super
-  end       
+  end
+  has_many :events       
 end

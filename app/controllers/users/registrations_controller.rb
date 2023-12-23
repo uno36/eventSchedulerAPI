@@ -1,8 +1,9 @@
-class RegistrationsController < Devise::RegistrationsController
+class Users::RegistrationsController < Devise::RegistrationsController
+  respond_to :json
   def create
     build_resource(sign_up_params)
-
     resource.save
+
     if resource.persisted?
       if resource.active_for_authentication?
         sign_up(resource_name, resource)
@@ -12,21 +13,16 @@ class RegistrationsController < Devise::RegistrationsController
         render json: { result: 'success_with_notice', notice: "signed_up_but_#{resource.inactive_message}" }
       end
     else
-      render json: { message: 'User could not be created successfully',
-                     errors: resource.errors.full_messages },
+      render json: { message: 'User could not be created successfully', errors: resource.errors.full_messages },
              status: :unprocessable_entity
     end
   end
 
-  def update
-    self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
-
-    resource_updated = update_resource(resource, account_update_params)
-    if resource_updated
+  def update    
+    if resource.update(account_update_params)
       render json: { code: 200, message: 'Updated successfully', data: resource }, status: :ok
     else
-      render json: { message: 'User could not be updated',
-                     errors: resource.errors.full_messages },
+      render json: { message: 'User could not be updated', errors: resource.errors.full_messages },
              status: :unprocessable_entity
     end
   end
@@ -38,7 +34,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   private
 
-  def sign_up_params
-    params.require(:user).permit(:username, :email, :password, :password_confirmation)
+  def configure_sign_up_params
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :name])
   end
 end

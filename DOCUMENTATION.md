@@ -6,6 +6,30 @@ All endpoints require authentication through JWT tokens. Include the JWT token i
 
 ---
 
+### Authentication
+#### Sign-in
+- **Endpoint**: `POST /login`
+  - Creates a new session for the user.
+
+#### Sign-out
+- **Endpoint**: `DELETE /logout`
+  - Destroys the current session, signing the user out.
+
+### User Registration
+#### New User Registration
+- **Endpoint**: `GET /signup/sign_up`
+  - Renders the page for new user registration.
+- **Endpoint**: `GET /signup/edit`
+  - Renders the page for editing user registration.
+- **Endpoint**: `POST /signup`
+  - Creates a new user registration.
+- **Endpoint**: `PATCH /signup`
+  - Updates the user's registration.
+- **Endpoint**: `DELETE /signup`
+  - Deletes the user's registration.
+- **Endpoint**: `GET /signup/cancel`
+  - Cancels the user's registration.
+
 ## Create Event
 
 ### Endpoint
